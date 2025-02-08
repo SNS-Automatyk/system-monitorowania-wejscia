@@ -1,0 +1,34 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>SMW - Sytem Monitorowania Wejść</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+	</head>
+
+	<body class="bg-gray-50 leading-normal tracking-normal max-w-4xl mx-auto">
+		<div class="container mx-auto p-4">
+			<section class="flex flex-col items-center justify-center h-screen">
+                <img class="w-1/2 mb-10" src="{% static 'automatyk-logo.png' %}" />
+				<h1 class="text-2xl sm:text-4xl text-center mb-4">System Monitorowania Wejść</h1>
+                {% if locked %}
+                    <img src="{% static 'icons8-lock.svg' %}"  class="w-1/3">
+                {% else %}
+                    <img src="{% static 'icons8-open-lock.svg' %}"  class="w-1/3">
+                {% endif %}
+                <p class="text-center mt-6">
+                    Data zmiany stanu: {{ last_change|date:"H:i d.m.Y"|default:"?" }}
+                </p>
+                {% comment %} czujnik online/offline {% endcomment %}
+                {% if online %}
+                    <p class="text-center mt-6 text-green-500">Czujnik online</p>
+                {% else %}
+                    <p class="text-center mt-6 text-red-500">Czujnik offline</p>
+                {% endif %}
+			</section>
+		</div>
+	</body>
+</html>
