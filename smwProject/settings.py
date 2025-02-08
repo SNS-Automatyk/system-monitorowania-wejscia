@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_spectacular',
 ]
 
