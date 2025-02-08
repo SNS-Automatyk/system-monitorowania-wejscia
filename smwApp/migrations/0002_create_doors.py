@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 def create_default_doors(apps, schema_editor):
     Door = apps.get_model('smwApp', 'Door')
-    Door.objects.create()
+    Door.objects.create(state='locked')
 
 
 class Migration(migrations.Migration):
