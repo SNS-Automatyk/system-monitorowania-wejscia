@@ -4,8 +4,8 @@ from .models import Door
 class DoorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Door
-        fields = ['id', 'state']
-        read_only_fields = ['id']
+        fields = ['id', 'state', 'last_online']
+        read_only_fields = ['id', 'last_online']
 
     def create(self, validated_data):
         raise serializers.ValidationError("Creation of Door instances is not allowed.")

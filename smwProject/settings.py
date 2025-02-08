@@ -38,7 +38,7 @@ SECRET_KEY = get_secret("SECRET_KEY", os.getenv("SECRET_KEY", get_random_secret_
 DEBUG = os.getenv("DEBUG", "true").lower() == "true"
 
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost").split(",")
 CORS_ALLOW_ALL_ORIGINS = os.getenv("CORS_ALLOW_ALL_ORIGINS", "false").lower() == "true"

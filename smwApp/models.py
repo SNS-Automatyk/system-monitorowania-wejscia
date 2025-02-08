@@ -24,12 +24,13 @@ class Door(models.Model):
 
     def __str__(self):
         return f"Door is {self.state}"
+    
+    def save(self, *args, **kwargs):
+        if self.pk:
+            door = Door.objects.get(pk=self.pk)
+            previous_state = door.state
+            self.last_online = timezone.now()
+            if previous_state != self.state:
+                DoorStateChange.objects.create(state=self.state)
+        super().save(*args, **kwargs)
 
-@receiver(pre_save, sender=Door)
-def track_state_change(sender, instance, **kwargs):
-    if instance.pk:
-        door = Door.objects.get(pk=instance.pk)
-        previous_state = door.state
-        door.last_online = timezone.now()
-        if previous_state != instance.state:
-            DoorStateChange.objects.create(state=instance.state)
