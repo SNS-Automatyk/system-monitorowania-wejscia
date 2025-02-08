@@ -1,0 +1,27 @@
+services:
+
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: ''
+      POSTGRES_PASSWORD_FILE: '/run/secrets/db_password'
+    secrets:
+      - db_password
+
+  web:
+    env_file: .prod.env
+    secrets:
+      - secret_key
+      - db_password
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  nginx:
+    ports:
+      - "80:80"
+      - "443:443"
+
+secrets:
+  secret_key:
+    file: /secrets/secret_key_production.txt
+  db_password:
+    file: /secrets/db_password.txt
